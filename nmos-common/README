@@ -1,0 +1,24 @@
+nmoscommon
+--------------
+
+Package of common, reusable modules for nmos open source implementation
+
+Requirements (further details in setup.py):
+  gevent
+  greenlet
+  geventwebsocket
+  six
+  flask
+  jinja2
+  werkzeug
+  itsdangerous
+  socketIO_client
+  flask_sockets
+  zmq
+  pygments
+  dateutil
+  flask_oauthlib
+  ws4py
+  requests
+  jsonschema
+  netifaces

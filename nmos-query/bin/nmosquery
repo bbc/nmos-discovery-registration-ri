@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+import gevent
+
+if __name__ == "__main__":
+    from nmosquery.service import QueryService
+    qs = QueryService()
+    qs.run()

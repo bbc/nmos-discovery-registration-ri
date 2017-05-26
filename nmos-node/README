@@ -1,0 +1,4 @@
+nodefacade
+------------
+
+Package providing a basic NMOS Node API implementation. The API is provided as a facade which accepts data from private back-end data providers.

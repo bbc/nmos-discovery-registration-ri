@@ -1,0 +1,2 @@
+/lib/init/upstart-job /etc/init.d/nmosregistration
+/lib/systemd/system/nmosregistration.service /etc/systemd/system/multi-user.target.wants/nmosregistration.service

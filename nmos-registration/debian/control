@@ -1,0 +1,12 @@
+Source: nmos-registration
+Maintainer: Alex Rawcliffe <alex.rawcliffe@bbc.co.uk>
+Section: python
+Priority: optional
+Build-Depends: python-all (>= 2.6.6-3), debhelper (>= 7), dh-python
+Standards-Version: 3.9.1
+
+Package: nmos-registration
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, reverse-proxy, nmos-common
+Description: Provides NMOS Registration API functionality
+    See wwww.nmos.tv for more details.

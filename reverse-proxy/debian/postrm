@@ -1,0 +1,13 @@
+#!/bin/sh
+# postrm script
+#
+# see: dh_installdeb(1)
+
+set -e
+
+a2ensite 000-default || true
+service apache2 restart
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,13 @@
+Source: nmos-node
+Maintainer: Andrew Bonney <andrew.bonney@bbc.co.uk>
+Section: python
+Priority: optional
+Build-Depends: python-all (>= 2.6.6-3), debhelper (>= 7), dh-python
+Standards-Version: 3.9.1
+
+Package: nmos-node
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, nmos-common, reverse-proxy
+Recommends: lldpd
+Description: Node facade for service registration and aggregation
+ See www.nmos.tv for more details

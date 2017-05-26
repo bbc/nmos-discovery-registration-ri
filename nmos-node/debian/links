@@ -1,0 +1,2 @@
+/lib/init/upstart-job /etc/init.d/nmosnode
+/lib/systemd/system/nmosnode.service /etc/systemd/system/multi-user.target.wants/nmosnode.service

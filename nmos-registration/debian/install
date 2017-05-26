@@ -1,0 +1,3 @@
+bin/nmosregistration usr/bin/
+etc/init/nmosregistration.conf /etc/init/
+etc/apache2/sites-available/*.conf /etc/apache2/sites-available/
