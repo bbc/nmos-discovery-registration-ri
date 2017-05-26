@@ -31,7 +31,7 @@ You can submit changes through a GitHub [pull request][18560a53] as follows:
 
 ### Contributor Licence Agreement
 
-We desire that contributors of pull requests have signed, and submitted via email, an [Individual Contributor Licence Agreement][icla] (ICLA) (PDF version [here][icla-pdf]), which is based on the [Apache ICLA][apache-icla].
+We desire that contributors of pull requests have signed, and submitted via email, an [Individual Contributor Licence Agreement][ICLA] (ICLA) (PDF version [here][ICLA-pdf]), which is based on the [Apache ICLA][Apache-ICLA].
 
 The purpose of this agreement is to clearly define the terms under which intellectual property has been contributed to the BBC and thereby allow us to defend the project should there be a legal dispute regarding the software at some future time.
 
@@ -50,9 +50,9 @@ If you wish to get more involved in creating NMOS specifications, working to imp
 
   [join]: https://github.com/join "GitHub sign-up"
 
-  [icla]: icla.md "ICLA"
+  [ICLA]: ICLA.md "ICLA"
 
 
-  [icla-pdf]: icla.pdf "ICLA in PDF"
+  [ICLA-pdf]: ICLA.pdf "ICLA in PDF"
 
-  [apache-icla]: https://www.apache.org/licenses/icla.pdf "Apache ICLA"
+  [Apache-ICLA]: https://www.apache.org/licenses/icla.pdf "Apache ICLA"
