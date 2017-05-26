@@ -1,5 +1,6 @@
-# rd-ips-nmos-apis
-Staging area for NMOS API open sourcing.
+# nmos-discovery-registration-ri
+
+Reference implementation of AMWA NMOS IS-04 Discovery and Registration Specification
 
 # Intoduction
 
