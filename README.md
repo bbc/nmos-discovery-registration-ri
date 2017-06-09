@@ -40,6 +40,8 @@ For the best experience:
 - Use a host machine running Ubuntu Linux (tested on 16.04 and 14.04).
 - Install [Vagrant][vagrant-install] using a [VirtualBox][vagrant-virtualbox] as a provider.
 
+> For hosting on non-Linux machines, see later in this README
+
 First install debian packaging dependencies on the host:
 ```
 sudo apt-get update
@@ -61,27 +63,49 @@ export https_proxy=https://<path-to-your-proxy:proxy-port>
 
 Now make the debian packages from source:
 ```
-rnmos-discovery-registration-ri/$ make deb
+nmos-discovery-registration-ri/$ make deb
 ```
 
 Finally, bring up the VMs:
 ```
-nmos-discovery-registration-ri/$ vagrant up
+nmos-discovery-registration-ri/$ cd vagrant
+nmos-discovery-registration-ri/vagrant $ vagrant up
 ```
 
 This will start two Ubuntu 16.04 VMs (named 'regquery' and 'node') and run provisioning scripts to install external python dependencies and the previously built debian packages.
 
-By default the VMs are configured share a private network with no external port forwarding. You can SSH to either of the instances, e.g.:
+By default the VMs are configured share a private network with no external port forwarding. You can SSH to either of the instances:
+
 ```
-vagrant ssh reqquery
+vagrant ssh regquery
+vagrant ssh node
 ```
+
 Once SSHd simple cURL commands will verify the operation of the APIs/registration and discovery, e.g.:
+
 ```
-curl --noproxy localhost localhost/x-nmos/query/v1.1/nodes/
+vagrant@regquery:~$ curl --noproxy localhost localhost/x-nmos/query/v1.1/nodes/
 ```
 Should show a single Node registered.
 
+# Hosting on non-Linux machines
 
+If a physical Linux box is not available, then it is possible to use a (temporary) Ubuntu VM to build the .debs and copy them up to the host.  For example on a Mac (starting in the nmos-discovery-registration-ri directory):
+
+```
+mac$ vagrant init bento/ubuntu-16.04 debbuilder
+mac$ vagrant up --provider virtualbox debbuilder
+mac$ vagrant ssh debbuilder
+
+debbuilder$ sudo apt-get update
+debbuilder$ sudo apt-get install python-all debhelper pbuilder dh-python apache2-dev devscripts
+debbuilder$ cp *.deb /vagrant # shared nmos-discovery-registration-ri/ on the host
+debbuilder$ exit
+
+mac$ [...continue as above...]
+mac$ vagrant destroy debbuilder # once you are happy it has worked!
+
+```
 
 [comment]: <> (References/Links)
 
