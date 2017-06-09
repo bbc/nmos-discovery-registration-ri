@@ -1,9 +1,17 @@
 # nmos-discovery-registration-ri
 
-Reference implementation of AMWA NMOS IS-04 Discovery and Registration Specification
+Reference implementation of the AMWA NMOS [IS-04 Discovery and Registration Specification][is-04].
 
-# Intoduction
+# Introduction
 
+The [Networked Media Open Specifications (NMOS)][nmos] is a growing family of specifications for professional networked media, created by the [Advanced Media Workflow Association (AMWA)][amwa]. NMOS specifications are made available [(on GitHub)][amwa-github] to support the development of products and services which work within an open industry framework.
+
+This repository provides a reference implementation of [IS-04][is-04], the AMWA NMOS Discovery and Registration Specification. This specifies HTTP/JSON APIs for registering and querying information about the resources in a networked media system.
+
+> For an introduction of the NMOS specifications, see the technical overview https://github.com/AMWA-TV/nmos, and then read the more detailed documentation in the IS-04 specification.
+
+
+# This repository
 This repository contains debianized NMOS API source and also a Vagrant file (plus provisioning scripts) to start a two VM NMOS cluster (one machine hosting Registration and Query APIs (hostname regquery), the other being an NMOS Node (hostname node))
 
 Repository structure:
@@ -29,8 +37,8 @@ vagrant/
 # Prerequisites
 
 For the best experience:
-- Use a host machine running Ubuntu linux (tested on 16.04 and 14.04).
-- Install vagrant using a virtualbox as a provider (https://www.vagrantup.com/docs/installation/) (https://www.vagrantup.com/docs/virtualbox/).
+- Use a host machine running Ubuntu Linux (tested on 16.04 and 14.04).
+- Install [Vagrant][vagrant-install] using a [VirtualBox][vagrant-virtualbox] as a provider.
 
 First install debian packaging dependencies on the host:
 ```
@@ -38,7 +46,7 @@ sudo apt-get update
 sudo apt-get install python-all debhelper pbuilder dh-python apache2-dev devscripts
 ```
 
-[Optionally] Install vagrant proxyconf plugin if you want to easily pass host machine proxy configuration to the guest machines:
+[Optionally] Install Vagrant proxyconf plugin if you want to easily pass host machine proxy configuration to the guest machines:
 ```
 vagrant plugin install vagrant-proxyconf
 ```
@@ -53,12 +61,12 @@ export https_proxy=https://<path-to-your-proxy:proxy-port>
 
 Now make the debian packages from source:
 ```
-rd-ips-nmos-apis/$ make deb
+rnmos-discovery-registration-ri/$ make deb
 ```
 
 Finally, bring up the VMs:
 ```
-rd-ips-nmos-apis/$ vagrant up
+nmos-discovery-registration-ri/$ vagrant up
 ```
 
 This will start two Ubuntu 16.04 VMs (named 'regquery' and 'node') and run provisioning scripts to install external python dependencies and the previously built debian packages.
@@ -71,4 +79,21 @@ Once SSHd simple cURL commands will verify the operation of the APIs/registratio
 ```
 curl --noproxy localhost localhost/x-nmos/query/v1.1/nodes/
 ```
-Should show the a single Node registered.
+Should show a single Node registered.
+
+
+
+[comment]: <> (References/Links)
+
+  [is-04]: https://github.com/AMWA-TV/nmos-discovery-registration "IS-04 Discovery and Registration Specification"
+
+  [nmos]: http://nmos.tv/ "NMOS"
+
+  [amwa]: http://amwa.tv/ "AMWA"
+
+  [amwa-github]: https://github.com/AMWA-TV "AMWA-TV GitHub"
+
+  [is-04]: https://github.com/AMWA-TV/nmos-discovery-registration "IS-04"
+
+  [vagrant-install]: https://www.vagrantup.com/docs/installation/ "Vagrant Installation"
+   [vagrant-virtualbox]: https://www.vagrantup.com/docs/virtualbox/ "Vagrant VirtualBox"
