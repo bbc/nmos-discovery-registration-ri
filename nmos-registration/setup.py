@@ -89,16 +89,6 @@ if sys.argv[1] != "sdist" and sys.argv[1] != "clean":
         print "The dependencies must be installed in that order"
         sys.exit(1)
 
-
-    # Check version of python-requests library...
-    import requests
-    if LooseVersion(requests.__version__) < LooseVersion("0.9.3"): # socketIO_client uses the Response.text property introduced in 0.9.3
-        print
-        print "While you have requests installed - probably the system version"
-        print "you need to have a more recent version installed. Please install"
-        print "python-requests from jenkins"
-        sys.exit(1)
-
 setup(name = "nmosregistration",
       version = "0.1.0",
       description = "Implementation of the NMOS Registration API",
