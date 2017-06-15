@@ -197,7 +197,7 @@ class NodeFacadeService:
         pidfile = "/tmp/ips-nodefacade.pid"
         file(pidfile, 'w').write(str(getpid()))
         self.start()
-        test_backend = MockBackend(self.registry)
+        test_backend = MockBackend(self.registry, self.node_id)
         while self.running:
             self.registry.update_ptp()
             time.sleep(1)

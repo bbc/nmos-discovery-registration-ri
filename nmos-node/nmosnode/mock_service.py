@@ -16,21 +16,22 @@ from registry import FacadeRegistry
 import gevent
 
 class MockBackend:
-    def __init__(self, registry):
+    def __init__(self, registry, node_id):
 
         self.registry = registry
+        self.node_id = node_id
         self.service = {}
         self.service['name'] = "Node-Mock-Backend"
         self.service['type'] = "x-mock"
         self.service['pid'] = 999
-        self.service['href'] = "http://localhost/bobbins"
-        self.service['proxyHref'] = "localhost/bobbins"
+        self.service['href'] = "http://mock-url/mock-url"
+        self.service['proxyHref'] = "http://mock-url/mock-url"
 
         mocks = {}
 
         mocks['mockSource'] = {
                       "max_api_version" :"v1.1",
-                      "description": "Capture Card Source Video",
+                      "description": "Mock Source Description",
                       "format": "urn:x-nmos:format:video",
                       "tags": {
                                "SourceDeviceType": [
@@ -46,21 +47,21 @@ class MockBackend:
                       "caps": {},
                       "version": "1441722516:851371645",
                       "parents": [],
-                          "label": "CaptureCardSourceVideo",
+                          "label": "Mock Source Label",
                           "id": "c23c6a65-8e91-4f6c-a484-046363dbca29",
-                          "device_id": "65fa8c20-890e-4b86-87b2-cfd9df91b7f8",
+                          "device_id": "05017e08-b329-45f9-a566-a3f99cc11e4d",
                           "clock_name": "clk1"
                     }
 
         mocks['mockFlow'] =  {
-                     "description": "Test Card",
+                     "description": "Mock Flow Description",
                      "tags": {},
                      "format": "urn:x-nmos:format:video",
-                    "label": "Test Card",
+                    "label": "Mock Flow Label",
                     "version": "1441704616:587121295",
                     "parents": [],
-                    "source_id": "02c46999-d532-4c52-905f-2e368a2af6cb",
-                    "device_id": "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                    "source_id": "c23c6a65-8e91-4f6c-a484-046363dbca29",
+                    "device_id": "05017e08-b329-45f9-a566-a3f99cc11e4d",
                     "id": "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
                     "media_type": "video/raw",
                     "frame_width": 1920,
@@ -89,55 +90,35 @@ class MockBackend:
                     ]
                     }
 
-        mocks['mockDeviceA'] = {
-        "receivers": [],
-        "label": "pipeline 3 default device",
-        "description": "pipeline 3 default device",
-        "tags": {},
-        "version": "1441704616:592733242",
-        "id": "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
-        "type": "urn:x-nmos:device:pipeline",
-        "senders": [
-            "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e"
-        ],
-        "node_id": "3b8be755-08ff-452b-b217-c9151eb21193",
-        "controls": [
-            {
-                "type": "urn:x-manufacturer:control:generic",
-                "href": "wss://154.67.63.2:4535"
-            }
-        ]
-                       }
-    
-        mocks['mockDeviceB'] = {
+        mocks['mockDevice'] = {
         "receivers": [
             "1eb53d65-ac83-441c-86f6-9b27df30ef0c"
         ],
-        "label": "pipeline 2 default device",
-        "description": "pipeline 2 default device",
+        "label": "Mock Device Label",
+        "description": "Mock Device Description",
         "tags": {},
         "version": "1441704514:993221361",
         "id": "05017e08-b329-45f9-a566-a3f99cc11e4d",
         "type": "urn:x-nmos:device:pipeline",
         "senders": [],
-        "node_id": "3b8be755-08ff-452b-b217-c9151eb21193",
+        "node_id": self.node_id,
         "controls": []
         }
 
         mocks['mockSender'] = {
-                "description": "Test Card", 
-                "label": "Test Card", 
+                "description": "Mock Sender Description", 
+                "label": "Mock Sender Label", 
                 "version": "1441704616:890020555", 
-                "manifest_href": "http://172.29.80.65:12345/x-nmos/node/v1.1/self/pipelinemanager/run/pipeline/3/pipel/ipp_rtptxfefa/misc/sdp/stream.sdp", 
+                "manifest_href": "http://mock-url/sdp/stream.sdp", 
                 "flow_id": "5fbec3b1-1b0f-417d-9059-8b94a47197ed", 
                 "id": "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e", 
                 "transport": "urn:x-nmos:transport:rtp.mcast", 
-                "device_id": "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                "device_id": "05017e08-b329-45f9-a566-a3f99cc11e4d",
                 "tags": {}
                     }
 
         mocks['mockReceiver'] = {
-            "description": "RTP receiver 1", 
+            "description": "Mock RTP Receiver Description", 
             "tags": {
                 "Location": [
                     "Location 1"
@@ -149,9 +130,9 @@ class MockBackend:
                     "video/raw"
                 ]
             },
-            "device_id": "0d0cb97e-b96a-4a39-887f-d491492d9081", 
+            "device_id": "05017e08-b329-45f9-a566-a3f99cc11e4d", 
             "version": "1441895693:480000000", 
-            "label": "Viewer 1", 
+            "label": "Mock RTP Receiver Label", 
             "id": "1eb53d65-ac83-441c-86f6-9b27df30ef0c", 
             "transport": "urn:x-nmos:transport:rtp", 
             "subscription": {
@@ -164,12 +145,12 @@ class MockBackend:
 
     def _runMockService(self, registry, service, mocks):
         registry.register_service(service['name'], service['type'], service['pid'], service['href'], service['proxyHref'])
-        while(True):
-             registry.register_resource(service['name'], service['pid'], "source", mocks['mockSource']['id'], mocks['mockSource'])
-             gevent.sleep(10)
-             registry.unregister_resource(service['name'], service['pid'], "source", mocks['mockSource']['id'])
-             gevent.sleep(4)
-        registry.unregister_service(service['name'], service['pid'])
+        registry.register_resource(service['name'], service['pid'], "device", mocks['mockDevice']['id'], mocks['mockDevice'])
+        registry.register_resource(service['name'], service['pid'], "source", mocks['mockSource']['id'], mocks['mockSource'])
+        registry.register_resource(service['name'], service['pid'], "flow", mocks['mockFlow']['id'], mocks['mockFlow'])
+        registry.register_resource(service['name'], service['pid'], "sender", mocks['mockSender']['id'], mocks['mockSender'])
+        registry.register_resource(service['name'], service['pid'], "receiver", mocks['mockReceiver']['id'], mocks['mockReceiver'])
+
         
     def _runHeartbeat(self, registry, service):
         while(True):
