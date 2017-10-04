@@ -20,7 +20,7 @@ https://github.com/AMWA-TV/nmos-discovery-registration
 
 ## Submitting changes
 
-You can submit changes through a GitHub [pull request][18560a53] as follows:
+You can submit changes through a GitHub pull request as follows:
 
 * Fork the repository.
 * Make and commit changes.
@@ -51,7 +51,6 @@ If you wish to get more involved in creating NMOS specifications, working to imp
   [join]: https://github.com/join "GitHub sign-up"
 
   [ICLA]: ICLA.md "ICLA"
-
 
   [ICLA-pdf]: ICLA.pdf "ICLA in PDF"
 
