@@ -1,2 +1,0 @@
-/lib/init/upstart-job /etc/init.d/nmosquery
-/lib/systemd/system/nmosquery.service /etc/systemd/system/multi-user.target.wants/nmosquery.service

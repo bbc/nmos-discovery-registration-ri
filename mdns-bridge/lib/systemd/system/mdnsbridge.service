@@ -1,5 +1,0 @@
-[Unit]
-Description=mdnsbridge
-
-[Service]
-ExecStart=/usr/bin/mdnsbridge

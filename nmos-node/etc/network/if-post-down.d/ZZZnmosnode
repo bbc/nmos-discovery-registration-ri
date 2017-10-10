@@ -1,9 +1,0 @@
-#!/bin/sh
-# Network config reload script for daemon process
-
-DAEMON_PIDFILE=/tmp/nmosnode.pid
-DAEMON_PID=$(cat $DAEMON_PIDFILE)
-if [ $? -eq 0 ]; then
-  kill -1 $DAEMON_PID
-fi
-exit 0

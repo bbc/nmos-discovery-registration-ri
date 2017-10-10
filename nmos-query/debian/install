@@ -1,4 +1,0 @@
-bin/nmosquery usr/bin/
-etc/init/nmosquery.conf /etc/init/
-etc/config.json /etc/nmosquery/
-etc/apache2/sites-available/*.conf /etc/apache2/sites-available/

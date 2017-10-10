@@ -1,2 +1,0 @@
-/lib/init/upstart-job /etc/init.d/mdnsbridge
-/lib/systemd/system/mdnsbridge.service /etc/systemd/system/multi-user.target.wants/mdnsbridge.service

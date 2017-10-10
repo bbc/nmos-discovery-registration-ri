@@ -1,4 +1,0 @@
-recursive-include debian *
-recursive-include etc *
-recursive-include bin *
-include README

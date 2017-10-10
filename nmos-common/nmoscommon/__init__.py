@@ -1,1 +1,0 @@
-from nmoscommonconfig import config

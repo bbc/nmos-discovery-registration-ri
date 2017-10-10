@@ -17,11 +17,20 @@
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
-apt-get install python-pip -y
+apt-get install python-pip devscripts apache2-dev debhelper etcd -y
 pip install --upgrade pip
+pip install setuptools
 
 sudo apt-get install libavahi-compat-libdnssd1 -y
 pip install -I https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
+
+cd /home/vagrant
+
+git clone --verbose https://github.com/bbc/nmos-common.git
+git clone --verbose https://github.com/bbc/nmos-reverse-proxy.git
+git clone --verbose https://github.com/bbc/nmos-query.git
+git clone --verbose https://github.com/bbc/nmos-registration.git
+git clone --verbose https://github.com/bbc/nmos-mdns-bridge.git
 
 pip install --no-deps gevent=="1.0.2"
 pip install --no-deps greenlet=="0.4.2"
@@ -42,8 +51,28 @@ pip install --no-deps requests=="2.2.1"
 pip install jsonschema=="2.3.0"
 pip install netifaces
 
-apt-get -f install /vagrant-root/nmos-common_0.1.0_all.deb -y
-apt-get -f install /vagrant-root/reverse-proxy_0.1.0_all.deb -y
-apt-get -f install /vagrant-root/mdns-bridge_0.1.0_all.deb -y
-apt-get -f install /vagrant-root/nmos-query_0.1.0_all.deb -y
-apt-get -f install /vagrant-root/nmos-registration_0.1.0_all.deb -y
+cd /home/vagrant/nmos-common
+python setup.py install
+
+cd /home/vagrant/nmos-reverse-proxy
+make deb
+dpkg -i ../reverse-proxy_*_all.deb
+sudo apt-get -f -y install
+
+cd /home/vagrant/nmos-mdns-bridge
+python setup.py install
+cp etc/apache2/sites-available/nmos-api-mdnsbridge-v1_0.conf /etc/apache2/sites-available/
+service mdnsbridge start
+service apache2 reload
+
+cd /home/vagrant/nmos-registration
+python setup.py install
+cp etc/apache2/sites-available/nmos-api-registration.conf /etc/apache2/sites-available/
+service nmosregistration start
+service apache2 reload
+
+cd /home/vagrant/nmos-query
+python setup.py install
+cp etc/apache2/sites-available/nmos-api-query.conf /etc/apache2/sites-available/
+service nmosquery start
+service apache2 reload

@@ -1,5 +1,0 @@
-[Unit]
-Description=nmosquery
-
-[Service]
-ExecStart=/usr/bin/nmosquery
