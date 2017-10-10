@@ -37,16 +37,7 @@ vagrant/
 # Prerequisites
 
 For the best experience:
-- Use a host machine running Ubuntu Linux (tested on 16.04 and 14.04).
 - Install [Vagrant][vagrant-install] using a [VirtualBox][vagrant-virtualbox] as a provider.
-
-> For hosting on non-Linux machines, see later in this README
-
-First install debian packaging dependencies on the host:
-```
-sudo apt-get update
-sudo apt-get install python-all debhelper pbuilder dh-python apache2-dev devscripts
-```
 
 [Optionally] Install Vagrant proxyconf plugin if you want to easily pass host machine proxy configuration to the guest machines:
 ```
@@ -61,12 +52,7 @@ export https_proxy=https://<path-to-your-proxy:proxy-port>
 
 # Start
 
-Now make the debian packages from source:
-```
-nmos-discovery-registration-ri/$ make deb
-```
-
-Finally, bring up the VMs:
+To bring up the VMs:
 ```
 nmos-discovery-registration-ri/$ cd vagrant
 nmos-discovery-registration-ri/vagrant $ vagrant up
@@ -88,25 +74,7 @@ vagrant@regquery:~$ curl --noproxy localhost localhost/x-nmos/query/v1.1/nodes/
 ```
 Should show a single Node registered.
 
-# Hosting on non-Linux machines
-
-If a physical Linux box is not available, then it is possible to use a (temporary) Ubuntu VM to build the .debs and copy them up to the host.  For example on a Mac (starting in the nmos-discovery-registration-ri directory):
-
 ```
-mac$ vagrant init bento/ubuntu-16.04 debbuilder
-mac$ vagrant up --provider virtualbox debbuilder
-mac$ vagrant ssh debbuilder
-
-debbuilder$ sudo apt-get update
-debbuilder$ sudo apt-get install python-all debhelper pbuilder dh-python apache2-dev devscripts
-debbuilder$ cp *.deb /vagrant # shared nmos-discovery-registration-ri/ on the host
-debbuilder$ exit
-
-mac$ [...continue as above...]
-mac$ vagrant destroy debbuilder # once you are happy it has worked!
-
-```
-
 [comment]: <> (References/Links)
 
   [is-04]: https://github.com/AMWA-TV/nmos-discovery-registration "IS-04 Discovery and Registration Specification"
