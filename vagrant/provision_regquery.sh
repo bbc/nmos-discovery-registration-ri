@@ -56,7 +56,7 @@ python setup.py install
 
 cd /home/vagrant/nmos-reverse-proxy
 make deb
-dpkg -i ../reverse-proxy_*_all.deb
+dpkg -i ../nmos-reverse-proxy_*_all.deb
 sudo apt-get -f -y install
 
 cd /home/vagrant/nmos-mdns-bridge
