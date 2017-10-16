@@ -25,10 +25,11 @@ apt-get install libavahi-compat-libdnssd1 -y
 
 cd /home/vagrant
 
-git clone --verbose https://github.com/bbc/nmos-common.git
-git clone --verbose https://github.com/bbc/nmos-reverse-proxy.git
-git clone --verbose https://github.com/bbc/nmos-node.git
-git clone --verbose https://github.com/bbc/nmos-mdns-bridge.git
+git clone https://github.com/bbc/nmos-common.git
+git clone https://github.com/bbc/nmos-device-connection-management-ri.git
+git clone https://github.com/bbc/nmos-reverse-proxy.git
+git clone https://github.com/bbc/nmos-node.git
+git clone https://github.com/bbc/nmos-mdns-bridge.git
 
 
 pip install -I https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
@@ -66,8 +67,12 @@ service mdnsbridge start
 service apache2 reload
 
 cd /home/vagrant/nmos-node
+git checkout mock
 python setup.py install
 cp etc/apache2/sites-available/nmos-api-node.conf /etc/apache2/sites-available/
 service nmosnode start
 service apache2 reload
 
+
+cd /home/vagrant/nmos-device-connection-management-ri
+python setup.py install
